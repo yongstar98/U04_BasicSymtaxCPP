@@ -7,7 +7,7 @@ ATestActor::ATestActor()
 
 	Actor = this;
 	//GLog->Log(Actor->GetName);
-	UE_LOG(LogTemp.Warning, TEXT("%s"), *Actor->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *Actor->GetName());
 
 }
 
@@ -15,7 +15,7 @@ void ATestActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GLog->Log(Actor->GetActorLocation().ToString);
+	GLog->Log(Actor->GetActorLocation().ToString());
 }
 
 void ATestActor::Tick(float DeltaTime)

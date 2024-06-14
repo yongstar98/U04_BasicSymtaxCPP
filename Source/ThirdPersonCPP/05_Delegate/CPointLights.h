@@ -10,8 +10,8 @@ UCLASS()
 class THIRDPERSONCPP_API ACPointLights : public AActor
 {
 	GENERATED_BODY()
-
-public:
+	
+public:	
 	ACPointLights();
 
 protected:
@@ -27,15 +27,13 @@ private:
 	UFUNCTION()
 	FString OnRandomLight(FLinearColor InColor);
 
-
 private:
 	UPROPERTY(VisibleDefaultsOnly)
-		USceneComponent* RootComp;
+	USceneComponent* RootComp;
 
 	UPROPERTY(VisibleDefaultsOnly)
-		UPointLightComponent* PointLightComp1;
+	UPointLightComponent* PointLightComp1;
 
 	UPROPERTY(VisibleDefaultsOnly)
-		UPointLightComponent* PointLightComp2;
+	UPointLightComponent* PointLightComp2;
 };
-

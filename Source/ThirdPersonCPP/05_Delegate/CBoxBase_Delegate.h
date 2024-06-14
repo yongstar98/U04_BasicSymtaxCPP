@@ -6,7 +6,7 @@
 
 DECLARE_DELEGATE(FBoxBeginOverlap); //void__()
 DECLARE_DELEGATE(FBoxEndOverlap); //void__()
-DECLARE_DELEGATE_RetVal_OneParam(FString, FBoxOneParam, FLinearColor);
+DECLARE_DELEGATE_RetVal_OneParam(FString, FBoxOneParam, FLinearColor); //FString__(FLinearColor)
 
 UCLASS()
 class THIRDPERSONCPP_API ACBoxBase_Delegate : public ACBoxBase
@@ -21,4 +21,5 @@ public:
 	FBoxBeginOverlap OnBoxBeginOverlap;
 	FBoxEndOverlap OnBoxEndOverlap;
 	FBoxOneParam OnBoxOneParam;
+	
 };

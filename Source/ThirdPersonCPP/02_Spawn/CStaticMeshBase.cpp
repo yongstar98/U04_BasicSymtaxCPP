@@ -36,6 +36,7 @@ void ACStaticMeshBase::UpdateParameters()
 	RandomColor.R = UKismetMathLibrary::RandomFloatInRange(0.f, 1.f);
 	RandomColor.G = UKismetMathLibrary::RandomFloatInRange(0.f, 1.f);
 	RandomColor.B = UKismetMathLibrary::RandomFloatInRange(0.f, 1.f);
+	//RandomColor = FLinearColor::MakeRandomColor();
 	RandomColor.A = 1.f;
 	DynamicMaterial->SetVectorParameterValue("BaseColor", RandomColor);
 

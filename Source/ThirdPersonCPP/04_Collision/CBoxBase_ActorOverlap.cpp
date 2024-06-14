@@ -4,7 +4,7 @@
 void ACBoxBase_ActorOverlap::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 }
 
 void ACBoxBase_ActorOverlap::ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)

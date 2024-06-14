@@ -8,8 +8,8 @@ UCLASS()
 class THIRDPERSONCPP_API AThirdPersonCPPGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
 
 public:
 	AThirdPersonCPPGameModeBase();
+
 };

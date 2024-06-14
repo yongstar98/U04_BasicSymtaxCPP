@@ -8,10 +8,10 @@ UCLASS()
 class THIRDPERSONCPP_API ACBoxBase_ActorOverlap : public ACBoxBase
 {
 	GENERATED_BODY()
-
+	
 protected:
 	virtual void BeginPlay() override;
-
+	
 private:
 	void ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor) override;
 };

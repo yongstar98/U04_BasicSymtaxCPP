@@ -27,12 +27,13 @@ ACPointLights::ACPointLights()
 void ACPointLights::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	PointLightComp1->SetVisibility(false);
 	PointLightComp2->SetVisibility(false);
 
 	TArray<AActor*> actors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACBoxBase_Delegate::StaticClass(), actors);
+
 	if (actors.Num() > 0)
 	{
 		ACBoxBase_Delegate* trigger = Cast<ACBoxBase_Delegate>(actors[0]);
@@ -60,12 +61,11 @@ void ACPointLights::OffLights()
 
 FString ACPointLights::OnRandomLight(FLinearColor InColor)
 {
-	PointLightComp2->SetVisibilty(true);
-	PointLightComp2->SetLightcolor(InColor);
+	PointLightComp2->SetVisibility(true);
+	PointLightComp2->SetLightColor(InColor);
 
-	//return InColor ToString();
+	//return InColor.ToString();
 	FString ReturnStr = FString::Printf(TEXT("RandomColor is %s"), *InColor.ToString());
 	return ReturnStr;
 }
-
 

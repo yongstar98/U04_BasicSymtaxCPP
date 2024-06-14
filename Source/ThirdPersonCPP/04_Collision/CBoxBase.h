@@ -11,8 +11,8 @@ UCLASS()
 class THIRDPERSONCPP_API ACBoxBase : public AActor
 {
 	GENERATED_BODY()
-
-public:
+	
+public:	
 	ACBoxBase();
 
 protected:
@@ -20,19 +20,19 @@ protected:
 
 protected:
 	UFUNCTION()
-		virtual void ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
+	virtual void ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
 	UFUNCTION()
-		virtual void ActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
+	virtual void ActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
 protected:
 	UPROPERTY(VisibleAnywhere)
-		USceneComponent* RootComp;
+	USceneComponent* RootComp;
 
 	UPROPERTY(VisibleAnywhere)
-		UBoxComponent* BoxComp;
+	UBoxComponent* BoxComp;
 
 	UPROPERTY(VisibleAnywhere)
-		UTextRenderComponent* TextRenderComp;
+	UTextRenderComponent* TextRenderComp;
 
 };

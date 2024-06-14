@@ -3,9 +3,7 @@
 #include "CoreMinimal.h"
 
 #define PrintLine() { CLog::Log(__FUNCTION__, __LINE__); }
-/**
- * 
- */
+
 class THIRDPERSONCPP_API CLog
 {
 public:

@@ -21,25 +21,21 @@ void ACLogActor::BeginPlay()
 
 	CLog::Log(777);
 	CLog::Log(PI);
-	CLog::Log("Hohohoho~~");
+	CLog::Log("Hohoho~~~~~");
 	CLog::Log(GetActorLocation());
 	CLog::Log(GetActorRotation());
 	CLog::Log(this);
 	CLog::Log(__FILE__);
 	CLog::Log(__FUNCTION__, __LINE__);
 	PrintLine();
-	
-	
 }
 
-// Called every frame
 void ACLogActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	RunningTime += DeltaTime; //GetWorld()->TimeSecondes
-	//RunningTime = GetWorld()->TimeSecondes;
+	//RunningTime += DeltaTime; //GetWorld()->TimeSeconds
+	RunningTime = GetWorld()->TimeSeconds;
 	CLog::Print(RunningTime, 100);
-
 }
 

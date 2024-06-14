@@ -29,22 +29,22 @@ void CLog::Print(const FRotator& InValue, int32 InKey, float InDuration, FColor 
 
 void CLog::Log(int32 InValue)
 {
-	UE_LOG(GameProject, Display, TEXT("%d"), InValue);;
+	UE_LOG(GameProject, Display, TEXT("%d"), InValue);
 }
 
 void CLog::Log(float InValue)
 {
-	UE_LOG(GameProject, Display, TEXT("%f"), InValue); 
+	UE_LOG(GameProject, Display, TEXT("%f"), InValue);
 }
 
 void CLog::Log(const FString& InValue)
 {
-	UE_LOG(GameProject, Display, TEXT("%s"), *InValue); 
+	UE_LOG(GameProject, Display, TEXT("%s"), *InValue);
 }
 
 void CLog::Log(const FVector& InValue)
 {
-	UE_LOG(GameProject, Display, TEXT("%s"), *InValue.ToString()); 
+	UE_LOG(GameProject, Display, TEXT("%s"), *InValue.ToString());
 }
 
 void CLog::Log(const FRotator& InValue)
@@ -60,7 +60,7 @@ void CLog::Log(const UObject* InObject)
 		str.Append(InObject->GetName());
 	}
 
-	str.Append(InObject ? " is not null " : "NULL");
+	str.Append(InObject ? " is not null" : "NULL");
 
 	UE_LOG(GameProject, Display, TEXT("%s"), *str);
 }

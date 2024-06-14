@@ -28,4 +28,3 @@ void ACBoxBase_ComponentOverlap::ComponentEndOverlap(UPrimitiveComponent* Overla
 {
 	PointLightComp->SetVisibility(false);
 }
-

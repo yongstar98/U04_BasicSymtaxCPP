@@ -1,6 +1,11 @@
 #include "CWeapon.h"
+#include "Global.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/Character.h"
+#include "CWeaponInterface.h"
+#include "CPlayer.h"
+
+static TAutoConsoleVariable<bool> CVarDebug(TEXT("Tore.DrawDebugLine"), false, TEXT("Enable Draw Aim Line"), ECVF_Cheat);
 
 ACWeapon::ACWeapon()
 {
@@ -29,7 +34,11 @@ ACWeapon::ACWeapon()
 	{
 		UnequipMontage = UnequipMontageAsset.Object;
 	}
-	
+	ConstructorHelpers::FClassFinder<UCameraShake> CameraShakeClassAsset(TEXT("/Game/BP_FireShake"));
+	if (CameraShakeClassAsset.Succeeded())
+	{
+		CameraShakeClass = CameraShakeClassAsset.Class;
+	}
 }
 
 void ACWeapon::BeginPlay()
@@ -48,6 +57,37 @@ void ACWeapon::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (bAiming == false) return;
+
+	ICWeaponInterface* ImplementActor = Cast<ICWeaponInterface>(OwnerCharacter);
+	if (ImplementActor == nullptr) return;
+
+	FVector Start, End, Direction;
+	ImplementActor->GetAimInfo(Start, End, Direction);
+
+	bool bDrawDebug = CVarDebugLine.GetValueOnGameThread();
+	if (bDrawDebug)
+	{
+		DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, -1, 0, 2.f);
+	}
+
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(this);
+	Params.AddIgnoredActor(OwnerCharacter);
+
+
+
+	FHitResult Hit;
+	if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECollisionChannel::ECC_Visibility, Params))
+	{
+		if (Hit.Component->IsSimulatingPhysics())
+		{
+			ImplementActor->OnTarget();
+			return;
+		}
+	}
+
+	ImplementActor->OffTarget();
 }
 
 void ACWeapon::Begin_Aiming()
@@ -58,6 +98,61 @@ void ACWeapon::Begin_Aiming()
 void ACWeapon::End_Aiming()
 {
 	bAiming = false;
+}
+
+void ACWeapon::Begin_Fire()
+{
+	if (bEquipped == false)return;
+	if (bEquipping == true)return;
+	if (bAiming == false)return;
+	if (bFiring == true)return;
+
+	bFiring = true;
+
+	Firing();
+}
+
+void ACWeapon::End_Fire()
+{
+	bFiring = false;
+}
+
+void ACWeapon::Firing()
+{
+	ACPlayer* Player = Cast<ACPlayer>(OwnerCharacter);
+	if (Player)
+	{
+		APlayerController* PC = Player->GetController<APlayerController>();
+
+		if (CameraShakeclass)
+		{
+			PC->PlayerCameraManager->PlayCameraShake(, );
+		}
+	}
+	OwnerCharacter->GetController<APlayerController>();
+
+	ICWeaponInterface* ImplementActor = Cast<ICWeaponInterface>(OwnerCharacter);
+	if (ImplementActor == nullptr) return;
+
+	FVector Start, End, Direction;
+	ImplementActor->GetAimInfo(Start, End, Direction);
+
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(this);
+	Params.AddIgnoredActor(OwnerCharacter);
+
+
+	FHitResult Hit;
+	if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECollisionChannel::ECC_Visibility, Params))
+	{
+		if (Hit.Component->IsSimulatingPhysics())
+		{
+			Direction = Hit.Actor->GetActorLocation() - OwnerCharacter->GetActorLocation();
+			Direction.Normalize();
+			Hit.Component->AddImpulseAtLocation(Direction * 3000.0f, OwnerCharacter->GetActorLocation());
+			
+		}
+	}
 }
 
 void ACWeapon::Equip()
@@ -114,7 +209,6 @@ void ACWeapon::End_Unequip()
 {
 	bEquipping = false;
 }
-//Todo. ANS
 
 
 

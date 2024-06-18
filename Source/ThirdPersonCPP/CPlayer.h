@@ -24,6 +24,11 @@ public:
 
 	FORCEINLINE ACWeapon* GetWeapon() override { return Weapon; }
 
+	// Inherited via ICWeaponInterface
+	virtual void GetAimInfo(FVector& OutAimStart, FVector& OutAimEnd, FVector& OutAimDirection) override;
+	virtual void OnTarget() override;
+	virtual void OffTarget() override;
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -39,6 +44,9 @@ private:
 
 	void OnAim();
 	void OffAim();
+
+	void OnFire();
+	void OffFire();
 
 public:
 	UFUNCTION(BlueprintCallable)
@@ -73,4 +81,6 @@ private:
 	ACWeapon* Weapon;
 
 	UCCrossHairWidget* CrossHairWidgetClass;
+
+	
 };
